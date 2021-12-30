@@ -17,11 +17,12 @@ set(BUNDLE_FILES
 add_library(bundle ${BUNDLE_FILES})
 target_link_libraries(bundle
   PRIVATE
-    Ceres::ceres
+    ${CERES_LIBRARIES}
     ${LAPACK_LIBRARIES}
     ${SUITESPARSE_LIBRARIES}
     foundation
 )
+
 if (LAPACK_FOUND)
     target_include_directories(bundle PRIVATE ${LAPACK_INCLUDE_DIRS})
 endif()

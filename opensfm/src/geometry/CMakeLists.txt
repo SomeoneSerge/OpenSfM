@@ -22,7 +22,7 @@ add_library(geometry ${GEOMETRY_FILES})
 target_link_libraries(geometry
     PRIVATE
     foundation
-    Ceres::ceres
+    ${CERES_LIBRARIES}
     )
 target_include_directories(geometry PUBLIC ${CMAKE_SOURCE_DIR})
 
