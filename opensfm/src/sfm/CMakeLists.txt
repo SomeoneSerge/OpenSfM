@@ -8,10 +8,12 @@ set(SFM_FILES
 )
 add_library(sfm ${SFM_FILES})
 target_link_libraries(sfm
+  PUBLIC
+    Eigen3::Eigen
   PRIVATE
     foundation
 )
-target_include_directories(sfm PUBLIC ${EIGEN_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR})
+target_include_directories(sfm PUBLIC ${CMAKE_SOURCE_DIR})
 
 set(SFM_TEST_FILES
     test/tracks_manager_test.cc
