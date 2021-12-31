@@ -33,12 +33,15 @@ if (OPENMP_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
+find_package(gflags REQUIRED)
+
 find_package(LAPACK)
 find_package(SuiteSparse)
 find_package(Eigen3 REQUIRED)
+
+find_package(glog REQUIRED)
+find_package(GTest REQUIRED)
 find_package(Ceres REQUIRED)
-find_package(Gflags REQUIRED)
-find_package(Glog REQUIRED)
 
 find_package(OpenCV)
 # OpenCV's OpenCVConfig will enforce imgcodecs for < 3.0
@@ -69,20 +72,13 @@ option(OPENSFM_BUILD_TESTS "Build OpenSfM unit tests." on)
 
 if (OPENSFM_BUILD_TESTS)
   enable_testing()
-  include_directories(third_party/gtest)
-  add_definitions(-DCERES_GFLAGS_NAMESPACE=${GFLAGS_NAMESPACE})
-
-  add_library(gtest
-              third_party/gtest/gmock_gtest_all.cc
-              third_party/gtest/gmock_main.cc)
-  target_include_directories(gtest PRIVATE ${GFLAGS_INCLUDE_DIR})
 
   set(TEST_MAIN test_main)
   add_library(${TEST_MAIN} testing_main.cc)
   target_link_libraries(${TEST_MAIN}
-                        ${GFLAGS_LIBRARY}
-                        ${GLOG_LIBRARY}
-                        gtest)
+      gflags
+      glog::glog
+      GTest::gtest)
 endif()
 
 ####### OpenSfM libraries #######
