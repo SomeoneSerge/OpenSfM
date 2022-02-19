@@ -54,6 +54,8 @@ endif()
 
 find_package(gflags REQUIRED)
 
+find_package(pybind11 REQUIRED)
+
 find_package(LAPACK)
 find_package(SuiteSparse)
 find_package(Eigen3 REQUIRED)
@@ -73,7 +75,6 @@ else()
 endif()
 
 ####### Third party libraries #######
-add_subdirectory(third_party/pybind11)
 add_subdirectory(third_party/akaze)
 add_subdirectory(third_party/vlfeat)
 

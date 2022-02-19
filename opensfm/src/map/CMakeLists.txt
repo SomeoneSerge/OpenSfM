@@ -20,7 +20,7 @@ set(MAP_FILES
 add_library(map ${MAP_FILES})
 target_link_libraries(map
   PUBLIC
-    pybind11
+    pybind11::module
     Eigen3::Eigen
   PRIVATE
     geo
@@ -39,7 +39,6 @@ target_link_libraries(pymap
     map
     geometry
     bundle
-    pybind11
 )
 
 if (OPENSFM_BUILD_TESTS)
